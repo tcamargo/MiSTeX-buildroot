@@ -1,0 +1,1 @@
+include $(sort $(wildcard $(BR2_EXTERNAL_MISTEX_PATH)/package/mistex/*/*.mk $(BR2_EXTERNAL_MISTEX_PATH)/package/mistex/*/*/*.mk $(BR2_EXTERNAL_MISTEX_PATH)/package/mistex/*/*/*/*.mk $(BR2_EXTERNAL_MISTEX_PATH)/package/mistex/*/*/*/*/*.mk))
