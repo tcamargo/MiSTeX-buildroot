@@ -1,29 +1,72 @@
 # MiSTeX buildroot
 
-Creates the SD card image for the Linux root filesystem
-of MiSTeX and the SDK for building the main executable.
+# Table of Contents
+1. [Requirements](#requirements)
+1. [Building](#building)
+    1. [Create docker image](#docker)
+    1. [Compiling](#compiling)
+    1. [Flashing](#flashing)
+    1. [Useful targets](#targets)
 
-The first version of MiSTeX used the RISCV Lichee RV
-board. Because of poor hardware and software stability,
-we decided to move to the raspberry pi zero.
+Creates the SD card image for the Linux root filesystem of MiSTeX and SDK for building the main executable.
+
+## Requirements
+
+- Any modern linux distro.
+- Docker
+- git
+- ~25GB of disk space
+
+Instructions to install  packages varies. Consult your distro documentation.
 
 ## Building
-The raspberry pi zero buildroot builds successfully
-under Ubuntu 22.04.2 LTS. Uses about 18GB of disk space.
+
+### Create docker image <a id="docker"></a>
+
+All build process is done inside a docker container. A Dockerfile is available for you to build the image yourself. You only have to do it once or when a change in image was necessary.
 
 ```
-  sudo apt-get install -y git make build-essential file wget cpio unzip rsync bc dosfstools
-  git clone https://github.com/MiSTeX-devel/MiSTeX-buildroot.git
-  cd MiSTeX-buildroot
-  git submodule init
-  git submodule update
-  cd rpi-zero
-  ./build.sh
+make build-docker-image
 ```
 
-the results are then found here:
-- buildroot/output/images/sdcard.img
-- buildroot/output/images/arm-buildroot-linux-gnueabihf_sdk-buildroot.tar.gz
+###  Compiling
 
-The first is to be flashed to sdcard,
-the second is the SDK which is used to build Main_MiSTeX.
+You can build as root or allow your user to use docker without sudo. Your choice.
+
+Currently, we support the following boards:
+
+| Board | Target Prefix | 
+| - | - | 
+| OrangePi Zero 2w | orangepi-zero-2w |
+
+You need to specify the target prefix in every make command from now on. Examples will use the OrangePi Zero 2w target. Adapt accordingly.
+
+```
+make orangepi-zero-2w-build
+``` 
+
+Sit back and enjoy your favorite beverage. It will take a while to bootstrap the toolchain and build all necessary packages.
+
+In case you have an unstable network connection, it might be good to download all source packages in advance.
+
+```
+make orangepi-zero-2w-source
+``` 
+
+### Flashing
+
+WIP
+
+### Useful targets <a id="targets"></a>
+
+|  | Target | 
+| - | - | 
+| Clean build | ` make <target preix>-clean ` |
+| Buildroot menu | ` make orangepi-zero-2w-build CMD=menuconfig ` |
+| Build single package | ` make <target preix>-pkg PKG=<package> ` |
+| Clean package directory | ` make <target preix>-pkg PKG=<package>-dirclean ` |
+| Kernel menu | ` orangepi-zero-2w-pkg PKG=linux-menuconfig ` |
+| U-Boot menu | ` orangepi-zero-2w-pkg PKG=uboot-menuconfig ` |
+
+See [Package-specific make targets](https://buildroot.org/downloads/manual/manual.html#pkg-build-steps) for more -pkg options.
+
