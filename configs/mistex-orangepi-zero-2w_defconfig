@@ -4,7 +4,7 @@ BR2_ARM_FPU_VFPV4=y
 
 BR2_PACKAGE_HOST_LINUX_HEADERS_CUSTOM_6_6=y
 BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_EUDEV=y
-BR2_ROOTFS_OVERLAY="$(BR2_EXTERNAL_MISTEX_PATH)/board/mistex/fsoverlay $(BR2_EXTERNAL_MISTEX_PATH)/board/orangepi/orangepi-zero-2w/fsoverlay"
+BR2_ROOTFS_OVERLAY="$(BR2_EXTERNAL_MISTEX_PATH)/board/mistex/fsoverlay $(BR2_EXTERNAL_MISTEX_PATH)/board/mistex/orangepi/orangepi-zero-2w/fsoverlay"
 BR2_GLOBAL_PATCH_DIR="$(BR2_EXTERNAL_MISTEX_PATH)/board/mistex/patches $(BR2_EXTERNAL_MISTEX_PATH)/board/mistex/orangepi/orangepi-zero-2w/patches"
 
 # Firmware
