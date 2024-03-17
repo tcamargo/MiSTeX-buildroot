@@ -65,8 +65,8 @@ WIP
 | Buildroot menu | ` make orangepi-zero-2w-build CMD=menuconfig ` |
 | Build single package | ` make <target preix>-pkg PKG=<package> ` |
 | Clean package directory | ` make <target preix>-pkg PKG=<package>-dirclean ` |
-| Kernel menu | ` orangepi-zero-2w-pkg PKG=linux-menuconfig ` |
-| U-Boot menu | ` orangepi-zero-2w-pkg PKG=uboot-menuconfig ` |
+| Kernel menu | ` make orangepi-zero-2w-pkg PKG=linux-menuconfig ` |
+| U-Boot menu | ` make orangepi-zero-2w-pkg PKG=uboot-menuconfig ` |
 
 See [Package-specific make targets](https://buildroot.org/downloads/manual/manual.html#pkg-build-steps) for more -pkg options.
 
